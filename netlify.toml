@@ -1,0 +1,7 @@
+# Use this ONLY if you're deploying the /public folder to Netlify as a
+# static frontend that talks to a separately-hosted Socket.io backend
+# (see README.md, "Option B"). Netlify itself cannot run server.js.
+
+[build]
+  publish = "public"
+  command = ""
