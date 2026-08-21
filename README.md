@@ -1,8 +1,9 @@
 # Snake Arena — 45-Player Multiplayer Snake
 
 Mouse-controlled multiplayer Snake for up to 45 players in one room. Host starts an
-80-second round; everyone eats gold food (+10), avoids pink poison (-8), and can grab a
-gold star for a temporary 2x score multiplier. Hold the mouse button to boost (limited
+80-second round; everyone eats gold food (+10), avoids pink poison (-8), races for
+scarce purple magic food (+50, only 5 on the field), and can grab a gold star for a
+temporary 2x score multiplier. Hold the mouse button to boost (limited
 energy, regenerates). Pick a neon color + pattern for your snake in the lobby. All sound
 and music is synthesized live with the Web Audio API — no audio files to host.
 
@@ -89,6 +90,7 @@ public/
 
 - `ROUND_MS` — round length (currently 80000 = 80s)
 - `FOOD_COUNT` / `POISON_COUNT` — how crowded the arena feels
+- `SS_FOOD_COUNT` / `SS_FOOD_VALUE` — magic food: scarce high-value pickups players compete for (5 × +50)
 - `BASE_SPEED` / `BOOST_SPEED` — pace of play
 - `MAX_TURN_PER_TICK` — how sharply snakes can turn (higher = easier to whip around)
 - `MAX_PLAYERS_PER_ROOM` — currently 45

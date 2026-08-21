@@ -29,6 +29,8 @@ const FOOD_COUNT = 37;
 const POISON_COUNT = 13;
 const FOOD_VALUE = 10;
 const POISON_VALUE = -8;
+const SS_FOOD_COUNT = 5; // magic food — scarce & high-value, players compete for it
+const SS_FOOD_VALUE = 50; // 5x regular food, worth racing across the arena for
 const STAR_DURATION_MS = 6000;
 const HEAD_RADIUS = 11;
 const ITEM_RADIUS = 9;
@@ -52,6 +54,7 @@ function createRoom(code) {
     hostId: null,
     status: "lobby", // lobby | countdown | playing | ended
     food: [],
+    ssFood: [],
     poison: [],
     star: null,
     endsAt: null,
@@ -83,6 +86,11 @@ function spawnPoison(room) {
   room.poison.push({ id: rid("p"), x: p.x, y: p.y });
 }
 
+function spawnSSFood(room) {
+  const p = randPos(30);
+  room.ssFood.push({ id: rid("sf"), x: p.x, y: p.y });
+}
+
 function maybeSpawnStar(room) {
   if (room.star) return;
   if (Math.random() < 0.006) {
@@ -93,9 +101,11 @@ function maybeSpawnStar(room) {
 
 function resetField(room) {
   room.food = [];
+  room.ssFood = [];
   room.poison = [];
   room.star = null;
   for (let i = 0; i < FOOD_COUNT; i++) spawnFood(room);
+  for (let i = 0; i < SS_FOOD_COUNT; i++) spawnSSFood(room);
   for (let i = 0; i < POISON_COUNT; i++) spawnPoison(room);
 }
 
@@ -264,6 +274,18 @@ function tick(room) {
         setTimeout(() => { if (room.status === "playing") spawnFood(room); }, 350 + Math.random() * 900);
       }
     }
+    // collisions: magic food (super score — scarce & contested)
+    for (let i = room.ssFood.length - 1; i >= 0; i--) {
+      const sf = room.ssFood[i];
+      const dx = sf.x - p.x, dy = sf.y - p.y;
+      if (dx * dx + dy * dy < (HEAD_RADIUS + ITEM_RADIUS) * (HEAD_RADIUS + ITEM_RADIUS)) {
+        room.ssFood.splice(i, 1);
+        const mult = now < p.multiplierUntil ? 2 : 1;
+        p.score = Math.max(0, p.score + SS_FOOD_VALUE * mult);
+        p.segments = Math.min(MAX_SEGMENTS, p.segments + 2);
+        setTimeout(() => { if (room.status === "playing") spawnSSFood(room); }, 800 + Math.random() * 1600);
+      }
+    }
     // collisions: poison
     for (let i = room.poison.length - 1; i >= 0; i--) {
       const po = room.poison[i];
@@ -290,6 +312,7 @@ function tick(room) {
     t: timeLeft,
     players: [...room.players.values()].map(publicPlayer),
     food: room.food,
+    ssFood: room.ssFood,
     poison: room.poison,
     star: room.star,
   });

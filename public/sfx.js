@@ -63,6 +63,12 @@ const SFX = (() => {
     tone({ freq: 520, slideTo: 900, dur: 0.09, type: "square", gain: 0.18 });
   };
 
+  const eatSSFood = () => {
+    [660, 990, 1320].forEach((f, i) =>
+      tone({ freq: f, dur: 0.12, type: "triangle", gain: 0.18, delay: i * 0.04 })
+    );
+  };
+
   const eatPoison = () => {
     tone({ freq: 280, slideTo: 90, dur: 0.28, type: "sawtooth", gain: 0.2 });
     noiseBurst({ dur: 0.15, gain: 0.08 });
@@ -131,7 +137,7 @@ const SFX = (() => {
   function unlock() { ensureCtx(); }
 
   return {
-    unlock, eatFood, eatPoison, starPickup, countdownTick, gameStart, gameOver,
+    unlock, eatFood, eatSSFood, eatPoison, starPickup, countdownTick, gameStart, gameOver,
     boostOn, uiClick, startMusic, stopMusic, setMuted, isMuted,
   };
 })();

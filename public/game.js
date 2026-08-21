@@ -19,7 +19,7 @@
     selectedColor: COLOR_PRESETS[0],
     selectedPattern: "solid",
     world: { w: 1600, h: 900 },
-    game: { players: [], food: [], poison: [], star: null, t: 80000 },
+    game: { players: [], food: [], ssFood: [], poison: [], star: null, t: 80000 },
     pointer: { x: 800, y: 450 },
     boosting: false,
   };
@@ -242,20 +242,24 @@
     SFX.gameStart();
     SFX.startMusic();
     lastFoodCount = null;
+    lastSSFoodCount = null;
     lastPoisonCount = null;
   });
 
   // ---------- live state ----------
   let lastFoodCount = null;
+  let lastSSFoodCount = null;
   let lastPoisonCount = null;
   let lastStarPresent = false;
 
   socket.on("state", (payload) => {
     // sound cues based on count deltas (cheap, avoids per-item id diffing)
     if (lastFoodCount !== null && payload.food.length < lastFoodCount) SFX.eatFood();
+    if (lastSSFoodCount !== null && payload.ssFood.length < lastSSFoodCount) SFX.eatSSFood();
     if (lastPoisonCount !== null && payload.poison.length < lastPoisonCount) SFX.eatPoison();
     if (lastStarPresent && !payload.star) SFX.starPickup();
     lastFoodCount = payload.food.length;
+    lastSSFoodCount = payload.ssFood.length;
     lastPoisonCount = payload.poison.length;
     lastStarPresent = !!payload.star;
 
@@ -440,6 +444,22 @@
     gctx.restore();
   }
 
+  function drawSSFood(f) {
+    const pulse = 1 + Math.sin(Date.now() / 150) * 0.18;
+    gctx.save();
+    gctx.translate(f.x, f.y);
+    gctx.rotate(Math.PI / 4);
+    gctx.shadowColor = "#c44bff";
+    gctx.shadowBlur = 18 * pulse;
+    gctx.fillStyle = "#c44bff";
+    const s = 8 * pulse;
+    gctx.fillRect(-s, -s, s * 2, s * 2);
+    gctx.shadowBlur = 0;
+    gctx.fillStyle = "#ffffff";
+    gctx.fillRect(-2, -2, 4, 4);
+    gctx.restore();
+  }
+
   function drawPoison(p) {
     gctx.save();
     gctx.shadowColor = "#ff3d81";
@@ -557,6 +577,7 @@
     gctx.clearRect(0, 0, state.world.w, state.world.h);
     drawGrid();
     state.game.food.forEach(drawFood);
+    state.game.ssFood.forEach(drawSSFood);
     state.game.poison.forEach(drawPoison);
     if (state.game.star) drawStar(state.game.star);
     // draw others first, me last so my snake renders on top
