@@ -18,15 +18,15 @@ app.use(express.static(path.join(__dirname, "public")));
 const WORLD_W = 1600;
 const WORLD_H = 900;
 const TICK_MS = 50; // 20 ticks/sec
-const ROUND_MS = 30000;
+const ROUND_MS = 60000;
 const COUNTDOWN_S = 3;
-const BASE_SPEED = 2.6; // world units per tick
+const BASE_SPEED = 2.8; // world units per tick
 const BOOST_SPEED = 4.6;
-const MAX_TURN_PER_TICK = 0.16; // radians, limits how sharply a snake can turn
+const MAX_TURN_PER_TICK = 0.20; // radians, limits how sharply a snake can turn
 const MIN_SEGMENTS = 6;
 const MAX_SEGMENTS = 70;
-const FOOD_COUNT = 34;
-const POISON_COUNT = 9;
+const FOOD_COUNT = 37;
+const POISON_COUNT = 13;
 const FOOD_VALUE = 10;
 const POISON_VALUE = -8;
 const STAR_DURATION_MS = 6000;
@@ -36,7 +36,7 @@ const BOOST_MAX_ENERGY = 100;
 const BOOST_DRAIN_PER_TICK = 2.2;
 const BOOST_REGEN_PER_TICK = 0.9;
 
-const MAX_PLAYERS_PER_ROOM = 40;
+const MAX_PLAYERS_PER_ROOM = 45;
 
 /** rooms: Map<roomCode, RoomState> */
 const rooms = new Map();
