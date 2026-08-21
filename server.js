@@ -1,5 +1,5 @@
 // Snake Arena — authoritative multiplayer server
-// Handles rooms, lobby, 30s rounds, food/poison/star spawning, scoring, leaderboard.
+// Handles rooms, lobby, 80s rounds, food/poison/star spawning, scoring, leaderboard.
 
 const path = require("path");
 const express = require("express");
@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const WORLD_W = 1600;
 const WORLD_H = 900;
 const TICK_MS = 50; // 20 ticks/sec
-const ROUND_MS = 60000;
+const ROUND_MS = 80000;
 const COUNTDOWN_S = 3;
 const BASE_SPEED = 2.8; // world units per tick
 const BOOST_SPEED = 4.6;

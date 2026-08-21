@@ -1,7 +1,7 @@
-# Snake Arena — 30-Player Multiplayer Snake
+# Snake Arena — 45-Player Multiplayer Snake
 
-Mouse-controlled multiplayer Snake for up to ~40 players in one room. Host starts a
-30-second round; everyone eats gold food (+10), avoids pink poison (-8), and can grab a
+Mouse-controlled multiplayer Snake for up to 45 players in one room. Host starts an
+80-second round; everyone eats gold food (+10), avoids pink poison (-8), and can grab a
 gold star for a temporary 2x score multiplier. Hold the mouse button to boost (limited
 energy, regenerates). Pick a neon color + pattern for your snake in the lobby. All sound
 and music is synthesized live with the Web Audio API — no audio files to host.
@@ -87,15 +87,15 @@ public/
 
 ## Tuning knobs (all in `server.js`)
 
-- `ROUND_MS` — round length (currently 30000 = 30s)
+- `ROUND_MS` — round length (currently 80000 = 80s)
 - `FOOD_COUNT` / `POISON_COUNT` — how crowded the arena feels
 - `BASE_SPEED` / `BOOST_SPEED` — pace of play
 - `MAX_TURN_PER_TICK` — how sharply snakes can turn (higher = easier to whip around)
-- `MAX_PLAYERS_PER_ROOM` — currently 40
+- `MAX_PLAYERS_PER_ROOM` — currently 45
 
 ## Multiple simultaneous games
 
 Rooms are just a code (`?room=YOURCODE` in the URL, or typed in the lobby). Any number
-of independent 30-player rounds can run at once on the same deployment under different
+of independent 45-player rounds can run at once on the same deployment under different
 room codes.
 # cop-snake-game

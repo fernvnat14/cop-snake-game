@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-<title>Snake Arena — 30-Player Neon Snake Battle</title>
+<title>Snake Arena — 45-Player Neon Snake Battle</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%230b0e1a%22/><circle cx=%2250%22 cy=%2250%22 r=%2222%22 fill=%22%2339ff88%22/></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
   <div class="lobby-wrap">
     <div class="brand">
       <h1 class="logo" data-text="SNAKE ARENA">SNAKE ARENA</h1>
-      <p class="tagline">30 players. 30 seconds. One slippery scramble.</p>
+      <p class="tagline">45 players. 80 seconds. One slippery scramble.</p>
     </div>
 
     <div class="lobby-grid">
@@ -56,11 +56,11 @@
       <div class="panel roster-panel">
         <div class="roster-head">
           <h2>Lobby <span id="roomLabel">— MAIN</span></h2>
-          <span id="playerCount" class="pill">0 / 40</span>
+          <span id="playerCount" class="pill">0 / 45</span>
         </div>
         <ul id="rosterList" class="roster-list"></ul>
         <div id="hostControls" class="host-controls hidden">
-          <button id="startBtn" class="btn btn-accent btn-lg">Start Game — 30s Round</button>
+          <button id="startBtn" class="btn btn-accent btn-lg">Start Game — 80s Round</button>
         </div>
         <p id="waitMsg" class="wait-msg hidden">Waiting for the host to start the round…</p>
         <p id="inviteHint" class="invite-hint"></p>
@@ -79,7 +79,7 @@
   <div class="hud-top">
     <div class="hud-block">
       <span class="hud-label">Time</span>
-      <span id="hudTimer" class="hud-value mono">30.0</span>
+      <span id="hudTimer" class="hud-value mono">80.0</span>
     </div>
     <div class="hud-block">
       <span class="hud-label">Score</span>

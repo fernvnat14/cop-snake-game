@@ -19,7 +19,7 @@
     selectedColor: COLOR_PRESETS[0],
     selectedPattern: "solid",
     world: { w: 1600, h: 900 },
-    game: { players: [], food: [], poison: [], star: null, t: 30000 },
+    game: { players: [], food: [], poison: [], star: null, t: 80000 },
     pointer: { x: 800, y: 450 },
     boosting: false,
   };
@@ -184,7 +184,7 @@
   socket.on("lobbyUpdate", (payload) => {
     state.hostId = payload.hostId;
     state.lobbyStatus = payload.status;
-    playerCount.textContent = `${payload.players.length} / 40`;
+    playerCount.textContent = `${payload.players.length} / 45`;
 
     rosterList.innerHTML = "";
     payload.players.forEach((p) => {
